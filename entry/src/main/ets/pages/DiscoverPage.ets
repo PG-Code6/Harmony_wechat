@@ -5,6 +5,7 @@ import { ShortVideoPage } from './ShortVideoPage';
 export struct DiscoverPage {
   @State showMoments: boolean = false;
   @State showShortVideo: boolean = false;
+  @Link is_scrollable: boolean;
 
   build() {
     Stack({ alignContent: Alignment.Center }) {
@@ -12,12 +13,14 @@ export struct DiscoverPage {
         MomentsPage({
           onBack: () => {
             this.showMoments = false;
+            this.is_scrollable = true;
           }
         })
       } else if (this.showShortVideo) {
         ShortVideoPage({
           onBack: () => {
             this.showShortVideo = false;
+            this.is_scrollable = true;
           }
         })
       } else {
@@ -62,6 +65,7 @@ export struct DiscoverPage {
               .backgroundColor(Color.White)
               .onClick(() => {
                 this.showMoments = true;
+                this.is_scrollable = false;
               })
             }
             
@@ -84,6 +88,8 @@ export struct DiscoverPage {
               .backgroundColor(Color.White)
               .onClick(() => {
                 this.showShortVideo = true;
+                //  关闭滑动
+                this.is_scrollable = false;
               })
             }
             .margin({ top: 10 })

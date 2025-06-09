@@ -5,7 +5,7 @@ import { ChatItemData, MessageData } from '../common/Types';
 export struct ChatDetailPage {
   chat: ChatItemData = {} as ChatItemData;
   onBack: () => void = () => {};
-  
+
   @State messageList: MessageData[] = [];
   
   @State inputMessage: string = '';
@@ -45,6 +45,7 @@ export struct ChatDetailPage {
           .width(24)
           .height(24)
           .onClick(() => {
+            //返回
             this.onBack();
           })
         Text(this.chat.name)
@@ -158,5 +159,6 @@ export struct ChatDetailPage {
     }
     .width('100%')
     .height('100%')
+    //禁止右滑动
   }
 } 

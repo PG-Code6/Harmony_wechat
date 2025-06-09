@@ -49,6 +49,7 @@ export struct ChatPage {
 
   @State showChatDetail: boolean = false;
   @State currentChat: ChatItemData = {} as ChatItemData;
+  @Link is_scrollable:  boolean;
 
   build() {
     Stack({ alignContent: Alignment.Center }) {
@@ -57,8 +58,10 @@ export struct ChatPage {
           chat: this.currentChat,
           onBack: () => {
             this.showChatDetail = false;
+            this.is_scrollable = true;
           }
         })
+        //禁止右滑动
       } else {
         Column() {
           // 顶部标题栏
@@ -89,6 +92,8 @@ export struct ChatPage {
                   onItemClick: () => {
                     this.currentChat = chat;
                     this.showChatDetail = true;
+                    //禁用滑动
+                    this.is_scrollable = false;
                   }
                 })
               }

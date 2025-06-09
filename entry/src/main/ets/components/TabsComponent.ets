@@ -6,6 +6,7 @@ import { ProfilePage } from '../pages/ProfilePage';
 @Component
 export struct TabsComponent {
   @State currentIndex: number = 0;
+  @State is_scrollable:  boolean = true;
   private tabsController: TabsController = new TabsController();
 
   @Builder TabBuilder(title: string, index: number, normalImg: Resource, selectedImg: Resource) {
@@ -30,22 +31,30 @@ export struct TabsComponent {
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
-        ChatPage()
+        ChatPage({
+          is_scrollable: this.is_scrollable,
+        })
       }
       .tabBar(this.TabBuilder('聊天', 0, $r('app.media.chat_normal'), $r('app.media.chat_selected')))
 
       TabContent() {
-        ContactsPage()
+        ContactsPage({
+          is_scrollable: this.is_scrollable,
+        })
       }
       .tabBar(this.TabBuilder('通讯录', 1, $r('app.media.contacts_normal'), $r('app.media.contacts_selected')))
 
       TabContent() {
-        DiscoverPage()
+        DiscoverPage({
+          is_scrollable: this.is_scrollable,
+        })
       }
       .tabBar(this.TabBuilder('发现', 2, $r('app.media.discover_normal'), $r('app.media.discover_selected')))
 
       TabContent() {
-        ProfilePage()
+        ProfilePage({
+          is_scrollable: this.is_scrollable,
+        })
       }
       .tabBar(this.TabBuilder('我', 3, $r('app.media.me_normal'), $r('app.media.me_selected')))
     }
@@ -53,6 +62,7 @@ export struct TabsComponent {
     .width('100%')
     .height('100%')
     .backgroundColor('#ffffff')
+    .scrollable(this.is_scrollable)
     .onChange((index: number) => {
       this.currentIndex = index;
     })

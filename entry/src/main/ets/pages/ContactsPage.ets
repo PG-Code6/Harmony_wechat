@@ -4,6 +4,7 @@ import { ContactData, ContactGroupData } from '../common/Types';
 @Component
 export struct ContactsPage {
   @State contactGroups: ContactGroupData[] = [];
+  @Link is_scrollable:  boolean;
 
   @State indexList: string[] = [];
   @State showContactDetail: boolean = false;
@@ -57,6 +58,7 @@ export struct ContactsPage {
           contact: this.currentContact,
           onBack: () => {
             this.showContactDetail = false;
+            this.is_scrollable = true;
           }
         })
       } else {
@@ -180,6 +182,8 @@ export struct ContactsPage {
                     .onClick(() => {
                       this.currentContact = contact;
                       this.showContactDetail = true;
+                      //禁用滑动
+                      this.is_scrollable = false;
                     })
                   }
                 })

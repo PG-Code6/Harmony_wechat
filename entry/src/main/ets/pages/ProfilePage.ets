@@ -10,7 +10,7 @@ export struct ProfilePage {
     name: '微信用户',
     wechatId: 'wxid_123456'
   };
-  
+  @Link is_scrollable: boolean;
   @State context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
 
   build() {
