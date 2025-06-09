@@ -8,6 +8,7 @@ export struct TabsComponent {
   @State currentIndex: number = 0;
   @State is_scrollable:  boolean = true;
   private tabsController: TabsController = new TabsController();
+  onLogout: () => void = () => {};
 
   @Builder TabBuilder(title: string, index: number, normalImg: Resource, selectedImg: Resource) {
     Column() {
@@ -54,6 +55,7 @@ export struct TabsComponent {
       TabContent() {
         ProfilePage({
           is_scrollable: this.is_scrollable,
+          onLogout: this.onLogout
         })
       }
       .tabBar(this.TabBuilder('我', 3, $r('app.media.me_normal'), $r('app.media.me_selected')))

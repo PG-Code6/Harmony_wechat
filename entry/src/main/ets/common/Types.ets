@@ -52,6 +52,7 @@ export interface VideoData {
   title: string;
   likes: number;
   comments: number;
+  videoSrc: Resource;
 }
 
 // 用户信息类型

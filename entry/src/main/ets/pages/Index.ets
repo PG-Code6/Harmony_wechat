@@ -9,7 +9,6 @@ struct Index {
   @State context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
 
   aboutToAppear() {
-    // 检查用户是否已登录，这里简化处理，实际应用中应该使用数据持久化
     // 首次启动时默认未登录
     this.isLoggedIn = false;
   }
@@ -17,9 +16,13 @@ struct Index {
   build() {
     Column() {
       if (this.isLoggedIn) {
-        TabsComponent()
+        TabsComponent({
+          onLogout: () => {
+            this.isLoggedIn = false;
+          }
+        })
       } else {
-        LoginPage({ 
+        LoginPage({
           onLoginSuccess: () => {
             this.isLoggedIn = true;
           }

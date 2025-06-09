@@ -53,9 +53,13 @@ export struct LoginPage {
                 prompt.showToast({ message: '请输入用户名和密码' });
                 return;
               }
-              // 模拟登录成功
-              prompt.showToast({ message: '登录成功' });
-              this.onLoginSuccess();
+              // 模拟登录
+              if(this.username.trim()==="zhansan" && this.password.trim()==="12345678a"){
+                prompt.showToast({ message: '登录成功' });
+                this.onLoginSuccess();
+              }else {
+                prompt.showToast({ message: '账号/密码错误' });
+              }
             })
           
           Text('注册新账号')

@@ -140,7 +140,7 @@ export struct MomentsPage {
                       .fontColor('#999999')
                     Blank()
                     Row() {
-                      Image($r('app.media.like_icon'))
+                      Image($r("app.media.star_icon"))
                         .width(16)
                         .height(16)
                       Text(moment.likes.toString())
