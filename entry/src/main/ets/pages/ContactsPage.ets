@@ -9,6 +9,7 @@ export struct ContactsPage {
   @State showContactDetail: boolean = false;
   @State currentContact: ContactData = {} as ContactData;
 
+
   aboutToAppear() {
     // 模拟通讯录数据
     const contacts: ContactData[] = [
