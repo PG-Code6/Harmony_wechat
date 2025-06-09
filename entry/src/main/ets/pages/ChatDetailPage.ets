@@ -1,6 +1,7 @@
 import prompt from '@ohos.promptAction';
 import { ChatItemData, MessageData } from '../common/Types';
 
+
 @Component
 export struct ChatDetailPage {
   chat: ChatItemData = {} as ChatItemData;
@@ -13,6 +14,14 @@ export struct ChatDetailPage {
   private listScroller: Scroller = new Scroller();
   private inputController: TextInputController = new TextInputController();
 
+  // 实现系统返回按钮回调
+
+  // onKeyDown(event: KeyboardEvent) {
+  //   if (event.key === 'Back') {
+  //     // 处理返回键操作，例如导航回上一页
+  //     Navigator.back();
+  //   }
+  // }
   aboutToAppear() {
     // 模拟聊天数据
     this.messageList = [
@@ -192,5 +201,6 @@ export struct ChatDetailPage {
     }
     .width('100%')
     .height('100%')
+
   }
 }

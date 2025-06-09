@@ -4,7 +4,7 @@ import { ContactData, ContactGroupData } from '../common/Types';
 @Component
 export struct ContactsPage {
   @State contactGroups: ContactGroupData[] = [];
-  @State is_scrollable: boolean = true;
+  @Link is_scrollable: boolean;
 
   @State indexList: string[] = [];
   @State showContactDetail: boolean = false;

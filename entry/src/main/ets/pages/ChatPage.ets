@@ -53,8 +53,7 @@ export struct ChatPage {
   // 添加底部栏控制回调函数
   hideTabBar?: () => void;
   showTabBar?: () => void;
-  is_scrollable: boolean = true;
-
+  @Link is_scrollable: boolean
   build() {
     Stack({ alignContent: Alignment.Center }) {
       if (this.showChatDetail) {
@@ -66,6 +65,7 @@ export struct ChatPage {
             if (this.showTabBar) {
               this.showTabBar();
             }
+            this.is_scrollable = true;
           }
         })
       } else {
@@ -98,6 +98,7 @@ export struct ChatPage {
                   onItemClick: () => {
                     this.currentChat = chat;
                     this.showChatDetail = true;
+                    this.is_scrollable = false;
                     // 进入聊天详情页面时隐藏底部栏
                     if (this.hideTabBar) {
                       this.hideTabBar();

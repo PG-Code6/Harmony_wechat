@@ -1,10 +1,16 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
+
+  // override onBackPressed(){
+  //   // 示例：弹出确认对话框
+  //   console.log('拦截返回键操作');
+  //   // 返回 ABILITY_BACK_CONSUME 表示消费事件，阻止默认返回行为
+  //   return true;
+  // }
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
