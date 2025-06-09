@@ -49,7 +49,11 @@ export struct ChatPage {
 
   @State showChatDetail: boolean = false;
   @State currentChat: ChatItemData = {} as ChatItemData;
-  @Link is_scrollable:  boolean;
+
+  // 添加底部栏控制回调函数
+  hideTabBar?: () => void;
+  showTabBar?: () => void;
+  is_scrollable: boolean = true;
 
   build() {
     Stack({ alignContent: Alignment.Center }) {
@@ -58,10 +62,12 @@ export struct ChatPage {
           chat: this.currentChat,
           onBack: () => {
             this.showChatDetail = false;
-            this.is_scrollable = true;
+            // 返回时显示底部栏
+            if (this.showTabBar) {
+              this.showTabBar();
+            }
           }
         })
-        //禁止右滑动
       } else {
         Column() {
           // 顶部标题栏
@@ -92,8 +98,10 @@ export struct ChatPage {
                   onItemClick: () => {
                     this.currentChat = chat;
                     this.showChatDetail = true;
-                    //禁用滑动
-                    this.is_scrollable = false;
+                    // 进入聊天详情页面时隐藏底部栏
+                    if (this.hideTabBar) {
+                      this.hideTabBar();
+                    }
                   }
                 })
               }
@@ -110,4 +118,4 @@ export struct ChatPage {
     .width('100%')
     .height('100%')
   }
-} 
+}

@@ -7,6 +7,7 @@ import { ProfilePage } from '../pages/ProfilePage';
 export struct TabsComponent {
   @State currentIndex: number = 0;
   @State is_scrollable:  boolean = true;
+  @State isTabBarVisible: boolean = true;
   private tabsController: TabsController = new TabsController();
   onLogout: () => void = () => {};
 
@@ -29,38 +30,54 @@ export struct TabsComponent {
     })
   }
 
+  hideTabBar(): void {
+    this.isTabBarVisible = false;
+  }
+
+  showTabBar(): void {
+    this.isTabBarVisible = true;
+  }
+
   build() {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
         ChatPage({
           is_scrollable: this.is_scrollable,
+          hideTabBar: (): void => this.hideTabBar(),
+          showTabBar: (): void => this.showTabBar()
         })
       }
-      .tabBar(this.TabBuilder('聊天', 0, $r('app.media.chat_normal'), $r('app.media.chat_selected')))
+      .tabBar(this.isTabBarVisible ? this.TabBuilder('聊天', 0, $r('app.media.chat_normal'), $r('app.media.chat_selected')) : null)
 
       TabContent() {
         ContactsPage({
           is_scrollable: this.is_scrollable,
+          hideTabBar: (): void => this.hideTabBar(),
+          showTabBar: (): void => this.showTabBar()
         })
       }
-      .tabBar(this.TabBuilder('通讯录', 1, $r('app.media.contacts_normal'), $r('app.media.contacts_selected')))
+      .tabBar(this.isTabBarVisible ? this.TabBuilder('通讯录', 1, $r('app.media.contacts_normal'), $r('app.media.contacts_selected')) : null)
 
       TabContent() {
         DiscoverPage({
           is_scrollable: this.is_scrollable,
+          hideTabBar: (): void => this.hideTabBar(),
+          showTabBar: (): void => this.showTabBar()
         })
       }
-      .tabBar(this.TabBuilder('发现', 2, $r('app.media.discover_normal'), $r('app.media.discover_selected')))
+      .tabBar(this.isTabBarVisible ? this.TabBuilder('发现', 2, $r('app.media.discover_normal'), $r('app.media.discover_selected')) : null)
 
       TabContent() {
         ProfilePage({
           is_scrollable: this.is_scrollable,
-          onLogout: this.onLogout
+          onLogout: this.onLogout,
+          hideTabBar: (): void => this.hideTabBar(),
+          showTabBar: (): void => this.showTabBar()
         })
       }
-      .tabBar(this.TabBuilder('我', 3, $r('app.media.me_normal'), $r('app.media.me_selected')))
+      .tabBar(this.isTabBarVisible ? this.TabBuilder('我', 3, $r('app.media.me_normal'), $r('app.media.me_selected')) : null)
     }
-    .barHeight(56)
+    .barHeight(this.isTabBarVisible ? 56 : 0)
     .width('100%')
     .height('100%')
     .backgroundColor('#ffffff')

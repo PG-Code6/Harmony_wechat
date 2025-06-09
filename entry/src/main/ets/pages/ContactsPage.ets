@@ -4,12 +4,15 @@ import { ContactData, ContactGroupData } from '../common/Types';
 @Component
 export struct ContactsPage {
   @State contactGroups: ContactGroupData[] = [];
-  @Link is_scrollable:  boolean;
+  @State is_scrollable: boolean = true;
 
   @State indexList: string[] = [];
   @State showContactDetail: boolean = false;
   @State currentContact: ContactData = {} as ContactData;
 
+  // 添加底部栏控制回调函数
+  hideTabBar?: () => void;
+  showTabBar?: () => void;
 
   aboutToAppear() {
     // 模拟通讯录数据
@@ -59,6 +62,10 @@ export struct ContactsPage {
           onBack: () => {
             this.showContactDetail = false;
             this.is_scrollable = true;
+            // 返回时显示底部栏
+            if (this.showTabBar) {
+              this.showTabBar();
+            }
           }
         })
       } else {
@@ -184,6 +191,10 @@ export struct ContactsPage {
                       this.showContactDetail = true;
                       //禁用滑动
                       this.is_scrollable = false;
+                      // 进入联系人详情页面时隐藏底部栏
+                      if (this.hideTabBar) {
+                        this.hideTabBar();
+                      }
                     })
                   }
                 })

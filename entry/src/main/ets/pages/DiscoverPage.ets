@@ -7,6 +7,10 @@ export struct DiscoverPage {
   @State showShortVideo: boolean = false;
   @Link is_scrollable: boolean;
 
+  // 添加底部栏控制回调函数
+  hideTabBar?: () => void;
+  showTabBar?: () => void;
+
   build() {
     Stack({ alignContent: Alignment.Center }) {
       if (this.showMoments) {
@@ -14,6 +18,10 @@ export struct DiscoverPage {
           onBack: () => {
             this.showMoments = false;
             this.is_scrollable = true;
+            // 返回时显示底部栏
+            if (this.showTabBar) {
+              this.showTabBar();
+            }
           }
         })
       } else if (this.showShortVideo) {
@@ -21,6 +29,10 @@ export struct DiscoverPage {
           onBack: () => {
             this.showShortVideo = false;
             this.is_scrollable = true;
+            // 返回时显示底部栏
+            if (this.showTabBar) {
+              this.showTabBar();
+            }
           }
         })
       } else {
@@ -43,7 +55,7 @@ export struct DiscoverPage {
           .height(56)
           .padding({ left: 16, right: 16 })
           .backgroundColor('#EDEDED')
-          
+
           // 功能列表
           List() {
             ListItem() {
@@ -66,9 +78,13 @@ export struct DiscoverPage {
               .onClick(() => {
                 this.showMoments = true;
                 this.is_scrollable = false;
+                // 进入朋友圈页面时隐藏底部栏
+                if (this.hideTabBar) {
+                  this.hideTabBar();
+                }
               })
             }
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.short_video_icon'))
@@ -90,10 +106,14 @@ export struct DiscoverPage {
                 this.showShortVideo = true;
                 //  关闭滑动
                 this.is_scrollable = false;
+                // 进入短视频页面时隐藏底部栏
+                if (this.hideTabBar) {
+                  this.hideTabBar();
+                }
               })
             }
             .margin({ top: 10 })
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.scan_icon'))
@@ -113,7 +133,7 @@ export struct DiscoverPage {
               .backgroundColor(Color.White)
             }
             .margin({ top: 10 })
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.shake_icon'))
@@ -132,7 +152,7 @@ export struct DiscoverPage {
               .padding({ left: 16, right: 16 })
               .backgroundColor(Color.White)
             }
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.search_icon'))
@@ -152,7 +172,7 @@ export struct DiscoverPage {
               .backgroundColor(Color.White)
             }
             .margin({ top: 10 })
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.nearby_icon'))
@@ -171,7 +191,7 @@ export struct DiscoverPage {
               .padding({ left: 16, right: 16 })
               .backgroundColor(Color.White)
             }
-            
+
             ListItem() {
               Row() {
                 Image($r('app.media.mini_programs_icon'))
@@ -203,4 +223,4 @@ export struct DiscoverPage {
     .width('100%')
     .height('100%')
   }
-} 
+}

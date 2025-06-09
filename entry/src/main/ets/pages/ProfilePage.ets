@@ -14,6 +14,10 @@ export struct ProfilePage {
   @State context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
   onLogout: () => void = () => {};
 
+  // 添加底部栏控制回调函数
+  hideTabBar?: () => void;
+  showTabBar?: () => void;
+
   build() {
     Column() {
       // 顶部标题栏
@@ -234,4 +238,4 @@ export struct ProfilePage {
     .height('100%')
     .backgroundColor('#EDEDED')
   }
-} 
+}
