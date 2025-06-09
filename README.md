@@ -1,14 +1,17 @@
 # Harmony_wechat
 
-## 项目简介
-本项目 `Harmony_wechat` 是使用鸿蒙技术仿写的微信界面。通过该项目，可以深入了解鸿蒙开发的相关技术和流程，同时实现一个类似微信的界面。
+![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/Harmony_wechat)
+![GitHub stars](https://img.shields.io/github/stars/yourusername/Harmony_wechat?style=social)
+![GitHub forks](https://img.shields.io/github/forks/yourusername/Harmony_wechat?style=social)
 
-## 项目结构
-以下是项目的主要目录结构及其说明：
+## 项目概述
+`Harmony_wechat` 是一个使用鸿蒙技术仿写微信界面的项目。此项目可作为学习鸿蒙开发的示例，帮助开发者了解如何运用鸿蒙技术实现类似微信的界面设计。
+
+## 目录结构
 ```
 Harmony_wechat/
-├── .gitignore             # 全局Git忽略文件，指定不需要纳入版本控制的文件和目录
-├── hvigorfile.ts          # 项目的Hvigor配置文件，用于构建和管理项目
+├── .gitignore             # 全局Git忽略文件
+├── hvigorfile.ts          # 项目的Hvigor配置文件
 ├── AppScope/              # 应用范围相关资源目录
 │   └── resources/         # 资源目录
 │       └── base/          # 基础资源目录
@@ -38,9 +41,27 @@ Harmony_wechat/
 │                       └── color.json # 深色模式下的颜色资源
 ```
 
-## 代码混淆配置
-在 `entry/obfuscation-rules.txt` 文件中，定义了项目的代码混淆规则，包括启用属性混淆、顶级名称混淆、文件名混淆和导出混淆等。具体规则如下：
+## 安装与运行
+
+### 环境要求
+- 安装 DevEco Studio
+- 配置鸿蒙开发环境
+
+### 克隆项目
+```bash
+git clone https://github.com/yourusername/Harmony_wechat.git
+cd Harmony_wechat
 ```
+
+### 构建与运行
+1. 打开 DevEco Studio，选择 `File` -> `Open`，然后选择项目目录 `Harmony_wechat`。
+2. 等待项目同步完成。
+3. 选择合适的模拟器或真机设备。
+4. 点击运行按钮，启动项目。
+
+## 代码混淆
+项目中使用了代码混淆来保护代码，混淆规则定义在 `entry/obfuscation-rules.txt` 文件中：
+```plaintext
 # Define project specific obfuscation rules here.
 # You can include the obfuscation configuration files in the current module's build-profile.json5.
 #
@@ -66,22 +87,20 @@ Harmony_wechat/
 -enable-export-obfuscation
 ```
 
-## 构建和运行
-### 依赖安装
-确保已经安装了鸿蒙开发所需的环境和工具，如 DevEco Studio 等。
-
-### 构建项目
-在项目根目录下，可以使用 Hvigor 进行项目构建。具体命令可以参考 Hvigor 的相关文档。
-
-### 运行项目
-将项目导入到 DevEco Studio 中，选择合适的模拟器或真机进行运行。
-
-## 注意事项
-- 在进行代码混淆时，需要根据项目的实际情况调整混淆规则，避免影响项目的正常运行。
-- 项目中的资源文件，如字符串、颜色、图像等，需要根据实际需求进行修改和扩展。
-
 ## 贡献
-欢迎对本项目进行贡献，如提交 Bug 报告、提出改进建议或提交代码合并请求等。
+如果你想为这个项目做出贡献，请遵循以下步骤：
+1. Fork 这个仓库。
+2. 创建一个新的分支：`git checkout -b your-feature-branch`。
+3. 提交你的更改：`git commit -m 'Add some feature'`。
+4. 推送到分支：`git push origin your-feature-branch`。
+5. 提交一个 Pull Request。
 
 ## 许可证
-本项目遵循 [具体许可证名称] 许可证。请查看 `LICENSE` 文件以获取更多信息。
+本项目采用 [具体许可证名称] 许可证。请查看 `LICENSE` 文件以获取更多信息。
+
+## 联系信息
+如果你有任何问题或建议，请通过以下方式联系：
+- 邮箱：your_email@example.com
+- GitHub Issues：[提交问题](https://github.com/yourusername/Harmony_wechat/issues)
+
+请将 `yourusername` 和 `your_email@example.com` 替换为你自己的 GitHub 用户名和邮箱地址。同时，将 `[具体许可证名称]` 替换为项目实际使用的许可证名称。 
