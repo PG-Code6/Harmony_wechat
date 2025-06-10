@@ -10,6 +10,14 @@ export struct ContactsPage {
   @State indexList: string[] = [];
   @State showContactDetail: boolean = false;
   @State currentContact: ContactData = {} as ContactData;
+  @State selectedIndex: number = 0;
+
+  // 列表控制器
+  private listScroller: Scroller = new Scroller();
+  // 每个分组的起始位置
+  private groupPositions: number[] = [];
+  // 特殊联系人区域的高度（用于计算偏移量）
+  private specialContactsHeight: number = 500; // 顶部标题栏+特殊联系人区域的估计高度
 
   // 添加底部栏控制回调函数
   hideTabBar?: () => void;
@@ -53,6 +61,39 @@ export struct ContactsPage {
 
     // 生成索引列表
     this.indexList = this.contactGroups.map(group => group.title);
+
+    // 计算每个分组的起始位置
+    this.calculateGroupPositions();
+  }
+
+  // 计算每个分组的起始位置
+  calculateGroupPositions() {
+    this.groupPositions = [];
+    let position = 0;
+    this.contactGroups.forEach(group => {
+      this.groupPositions.push(position);
+      // 每个组标题加上组内联系人数量
+      position += 1 + group.contacts.length;
+    });
+  }
+
+  // 滚动到指定索引的分组
+  scrollToIndex(index: number) {
+    if (index >= 0 && index < this.groupPositions.length) {
+      // 滚动到对应位置，并设置选中索引
+      this.listScroller.scrollToIndex(this.groupPositions[index]);
+      this.selectedIndex = index;
+    }
+  }
+
+  // 根据当前可见的第一项来更新选中的索引
+  updateSelectedIndex(firstVisibleIndex: number) {
+    for (let i = this.groupPositions.length - 1; i >= 0; i--) {
+      if (firstVisibleIndex >= this.groupPositions[i]) {
+        this.selectedIndex = i;
+        break;
+      }
+    }
   }
 
   build() {
@@ -167,10 +208,15 @@ export struct ContactsPage {
           }
           .width('100%')
           .margin({ bottom: 10 })
+          .id('specialContacts')
+          .onAreaChange((oldArea: Area, newArea: Area) => {
+            // 获取特殊联系人区域的高度，用于计算偏移量
+            this.specialContactsHeight = newArea.height as number + 56; // 加上标题栏高度
+          })
 
           // 联系人列表
-          List() {
-            ForEach(this.contactGroups, (group: ContactGroupData) => {
+          List({ space: 0, initialIndex: 0, scroller: this.listScroller }) {
+            ForEach(this.contactGroups, (group: ContactGroupData, groupIndex: number) => {
               ListItemGroup({ header: this.GroupHeader(group.title) }) {
                 ForEach(group.contacts, (contact: ContactData) => {
                   ListItem() {
@@ -203,12 +249,19 @@ export struct ContactsPage {
               }
             })
           }
+          .sticky(StickyStyle.Header)
           .width('100%')
           .layoutWeight(1)
           .backgroundColor('#EDEDED')
+          .onScrollIndex((firstIndex: number) => {
+            this.updateSelectedIndex(firstIndex);
+          })
 
           // 右侧索引栏
-          AlphabetIndexer({ arrayValue: this.indexList, selected: 0 })
+          AlphabetIndexer({
+            arrayValue: this.indexList,
+            selected: this.selectedIndex
+          })
             .itemSize(16)
             .font({ size: 12 })
             .selectedFont({ size: 14, weight: FontWeight.Bold })
@@ -218,6 +271,9 @@ export struct ContactsPage {
             .popupColor('#07C160')
             .alignStyle(IndexerAlign.Right)
             .position({ x: '90%', y: '30%' })
+            .onSelect((index: number) => {
+              this.scrollToIndex(index);
+            })
         }
         .width('100%')
         .height('100%')
@@ -235,5 +291,6 @@ export struct ContactsPage {
       .width('100%')
       .height(30)
       .padding({ left: 16 })
+      .id(`header-${title}`)
   }
 }
