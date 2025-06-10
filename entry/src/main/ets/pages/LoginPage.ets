@@ -54,7 +54,7 @@ export struct LoginPage {
                 return;
               }
               // 模拟登录
-              if(this.username.trim()==="zhansan" && this.password.trim()==="12345678a"){
+              if(this.username.trim()==="zhangsan" && this.password.trim()==="12345678a"){
                 prompt.showToast({ message: '登录成功' });
                 this.onLoginSuccess();
               }else {
