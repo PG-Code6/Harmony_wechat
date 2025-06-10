@@ -16,14 +16,15 @@ export struct ChatDetailPage {
 
   // 实现系统返回按钮回调
 
-  // onKeyDown(event: KeyboardEvent) {
-  //   if (event.key === 'Back') {
-  //     // 处理返回键操作，例如导航回上一页
-  //     Navigator.back();
-  //   }
-  // }
-  aboutToAppear() {
+  @Link @Watch('backChange') is_back: boolean;//监听返回按钮传值
+  backChange(): void {
+    // this.onBack()
+    this.onBack();
+  }
+  aboutToAppear():  void {
     // 模拟聊天数据
+
+
     this.messageList = [
       {
         id: 1,
@@ -48,6 +49,7 @@ export struct ChatDetailPage {
       }
     ];
   }
+
 
   // 滚动到底部
   scrollToBottom() {

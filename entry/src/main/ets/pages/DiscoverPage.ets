@@ -6,6 +6,7 @@ export struct DiscoverPage {
   @State showMoments: boolean = false;
   @State showShortVideo: boolean = false;
   @Link is_scrollable: boolean;
+  @Link is_back: boolean;
 
   // 添加底部栏控制回调函数
   hideTabBar?: () => void;
@@ -15,6 +16,7 @@ export struct DiscoverPage {
     Stack({ alignContent: Alignment.Center }) {
       if (this.showMoments) {
         MomentsPage({
+          is_back: this.is_back,
           onBack: () => {
             this.showMoments = false;
             this.is_scrollable = true;
@@ -26,6 +28,7 @@ export struct DiscoverPage {
         })
       } else if (this.showShortVideo) {
         ShortVideoPage({
+          is_back: this.is_back,
           onBack: () => {
             this.showShortVideo = false;
             this.is_scrollable = true;

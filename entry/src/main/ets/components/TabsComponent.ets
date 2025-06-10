@@ -8,6 +8,7 @@ export struct TabsComponent {
   @State currentIndex: number = 0;
   @State is_scrollable:  boolean = true;
   @State isTabBarVisible: boolean = true;
+  @Link is_back:  boolean; //监听返回按钮传值
   private tabsController: TabsController = new TabsController();
   onLogout: () => void = () => {};
 
@@ -43,6 +44,7 @@ export struct TabsComponent {
       TabContent() {
         ChatPage({
           is_scrollable: this.is_scrollable,
+          is_back: this.is_back,//返回按钮状态
           hideTabBar: (): void => this.hideTabBar(),
           showTabBar: (): void => this.showTabBar()
         })
@@ -52,6 +54,7 @@ export struct TabsComponent {
       TabContent() {
         ContactsPage({
           is_scrollable: this.is_scrollable,
+          is_back: this.is_back,
           hideTabBar: (): void => this.hideTabBar(),
           showTabBar: (): void => this.showTabBar()
         })
@@ -61,6 +64,7 @@ export struct TabsComponent {
       TabContent() {
         DiscoverPage({
           is_scrollable: this.is_scrollable,
+          is_back: this.is_back,
           hideTabBar: (): void => this.hideTabBar(),
           showTabBar: (): void => this.showTabBar()
         })
@@ -70,6 +74,7 @@ export struct TabsComponent {
       TabContent() {
         ProfilePage({
           is_scrollable: this.is_scrollable,
+          // is_back: this.is_back,
           onLogout: this.onLogout,
           hideTabBar: (): void => this.hideTabBar(),
           showTabBar: (): void => this.showTabBar()

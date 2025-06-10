@@ -5,13 +5,23 @@ import { ContactData, ChatItemData } from '../common/Types';
 export struct ContactDetailPage {
   contact: ContactData = {} as ContactData;
   onBack: () => void = () => {};
+
   
   @State showChat: boolean = false;
+  is_back_use:  boolean = true;
+  @Link @Watch('backChange') is_back: boolean;//监听返回按钮传值
+  backChange(): void {
+    // this.onBack()
+    if(this.is_back_use == true){
+      this.onBack();
+    }
+  }
 
   build() {
     Stack({ alignContent: Alignment.Center }) {
       if (this.showChat) {
         ChatDetailPage({
+          is_back: this.is_back,
           chat: {
             id: this.contact.id,
             avatar: this.contact.avatar,
@@ -22,6 +32,7 @@ export struct ContactDetailPage {
           } as ChatItemData,
           onBack: () => {
             this.showChat = false;
+            this.is_back_use = true;
           }
         })
       } else {
@@ -78,6 +89,7 @@ export struct ContactDetailPage {
               .width(60)
               .onClick(() => {
                 this.showChat = true;
+                this.is_back_use = false;
               })
               
               Column() {

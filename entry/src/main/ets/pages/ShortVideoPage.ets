@@ -4,6 +4,11 @@ import prompt from '@ohos.promptAction';
 @Component
 export struct ShortVideoPage {
   onBack: () => void = () => {};
+  @Link @Watch('backChange') is_back: boolean;//监听返回按钮传值
+  backChange(): void {
+    // this.onBack()
+    this.onBack();
+  }
 
   @State videoList: VideoData[] = [
     {

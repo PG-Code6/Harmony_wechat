@@ -5,6 +5,7 @@ import { ContactData, ContactGroupData } from '../common/Types';
 export struct ContactsPage {
   @State contactGroups: ContactGroupData[] = [];
   @Link is_scrollable: boolean;
+  @Link is_back: boolean;
 
   @State indexList: string[] = [];
   @State showContactDetail: boolean = false;
@@ -59,6 +60,7 @@ export struct ContactsPage {
       if (this.showContactDetail) {
         ContactDetailPage({
           contact: this.currentContact,
+          is_back: this.is_back,
           onBack: () => {
             this.showContactDetail = false;
             this.is_scrollable = true;

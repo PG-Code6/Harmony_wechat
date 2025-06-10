@@ -53,12 +53,17 @@ export struct ChatPage {
   // 添加底部栏控制回调函数
   hideTabBar?: () => void;
   showTabBar?: () => void;
-  @Link is_scrollable: boolean
+  @Link is_scrollable: boolean;
+  @Link is_back: boolean;
+
+
+
   build() {
     Stack({ alignContent: Alignment.Center }) {
       if (this.showChatDetail) {
         ChatDetailPage({
           chat: this.currentChat,
+          is_back: this.is_back,
           onBack: () => {
             this.showChatDetail = false;
             // 返回时显示底部栏

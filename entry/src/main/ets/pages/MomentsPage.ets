@@ -3,6 +3,11 @@ import { MomentData } from '../common/Types';
 @Component
 export struct MomentsPage {
   onBack: () => void = () => {};
+  @Link @Watch('backChange') is_back: boolean;//监听返回按钮传值
+  backChange(): void {
+    // this.onBack()
+    this.onBack();
+  }
   
   @State momentsList: MomentData[] = [
     {
