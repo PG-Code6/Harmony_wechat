@@ -253,9 +253,9 @@ export struct ContactsPage {
           .width('100%')
           .layoutWeight(1)
           .backgroundColor('#EDEDED')
-          .onScrollIndex((firstIndex: number) => {
-            this.updateSelectedIndex(firstIndex);
-          })
+          // .onScrollIndex((firstIndex: number) => {
+          //   this.updateSelectedIndex(firstIndex);
+          // })
 
           // 右侧索引栏
           AlphabetIndexer({
@@ -266,14 +266,14 @@ export struct ContactsPage {
             .font({ size: 12 })
             .selectedFont({ size: 14, weight: FontWeight.Bold })
             .popupFont({ size: 30, weight: FontWeight.Bold })
-            .usingPopup(true)
+            // .usingPopup(true)
             .selectedColor('#07C160')
             .popupColor('#07C160')
             .alignStyle(IndexerAlign.Right)
             .position({ x: '90%', y: '30%' })
-            .onSelect((index: number) => {
-              this.scrollToIndex(index);
-            })
+            // .onSelect((index: number) => {
+            //   this.scrollToIndex(index);
+            // })
         }
         .width('100%')
         .height('100%')
